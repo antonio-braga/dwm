@@ -1,0 +1,72 @@
+<html class="" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-Translated-By" content="Google">
+  <meta http-equiv="X-Translated-To" content="pt">
+  <script type="text/javascript" src="dwm-6.2-urg-border_files/m=ajaxproxy" data-sourceurl="https://dwm.suckless.org/patches/urgentborder/dwm-6.2-urg-border.diff"></script>
+  <meta name="robots" content="none">
+ <script async="" src="dwm-6.2-urg-border_files/lazy.min.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="dwm-6.2-urg-border_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="dwm-6.2-urg-border_files/m=el_main"></script></head>
+ <body style="margin-top: 56px;"><iframe style="border: medium none; border-radius: 0px; box-shadow: none; height: 57px; left: 0px; right: auto; position: fixed; top: 0px; transition: none 0s ease 0s; width: 100%; z-index: 2147483646;" title="Google Translate navigation" id="gt-nvframe" role="navigation" aria-label="Google Translate navigation" src="dwm-6.2-urg-border_files/websitetranslationui.html" frameborder="0"></iframe>
+  <script type="text/javascript" src="dwm-6.2-urg-border_files/m=navigationui" data-environment="prod" data-proxy-url="https://dwm-suckless-org.translate.goog" data-proxy-full-url="https://dwm-suckless-org.translate.goog/patches/urgentborder/dwm-6.2-urg-border.diff?_x_tr_sl=en&amp;_x_tr_tl=pt&amp;_x_tr_hl=pt-BR" data-source-url="https://dwm.suckless.org/patches/urgentborder/dwm-6.2-urg-border.diff" data-source-language="en" data-target-language="pt" data-display-language="pt-BR" data-detected-source-language="" data-is-source-untranslated="false" data-source-untranslated-url="https://translate.google.com/website?sl=en&amp;tl=pt&amp;hl=pt-BR&amp;u=https://dwm.suckless.org/patches/urgentborder/dwm-6.2-urg-border.diff&amp;anno=2" data-use-in-place-translation="true" data-client="tr"></script>
+  <pre>From f20e5593e154e7e46c3f7100bd1378c7844b5ec8 Mon Sep 17 00:00:00 2001
+From: Dirk Leichsenring <dlei@reddott.de>
+    
+Date: Sun, 21 Jun 2020 14:00:40 +0200
+Subject: [PATCH] Make the borders of urgent windows a different color - for dwm 6.2
+
+---
+ config.def.h | 2 ++
+ dwm.c        | 7 +++++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 1c0b587..1cb4492 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -12,10 +12,12 @@ static const char col_gray2[]       = "#444444";
+ static const char col_gray3[]       = "#bbbbbb";
+ static const char col_gray4[]       = "#eeeeee";
+ static const char col_cyan[]        = "#005577";
++static const char col_urgborder[]   = "#ff0000";
+ static const char *colors[][3]      = {
+ 	/*               fg         bg         border   */
+ 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+ 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
++	[SchemeUrg]  = { col_gray4, col_cyan,  col_urgborder  },
+ };
+ 
+ /* tagging */
+diff --git a/dwm.c b/dwm.c
+index 4465af1..fda4013 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -59,7 +59,7 @@
+ 
+ /* enums */
+ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+-enum { SchemeNorm, SchemeSel }; /* color schemes */
++enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
+ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
+        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
+        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+@@ -2022,8 +2022,11 @@ updatewmhints(Client *c)
+ 		if (c == selmon-&gt;sel &amp;&amp; wmh-&gt;flags &amp; XUrgencyHint) {
+ 			wmh-&gt;flags &amp;= ~XUrgencyHint;
+ 			XSetWMHints(dpy, c-&gt;win, wmh);
+-		} else
++		} else {
+ 			c-&gt;isurgent = (wmh-&gt;flags &amp; XUrgencyHint) ? 1 : 0;
++			if (c-&gt;isurgent)
++				XSetWindowBorder(dpy, c-&gt;win, scheme[SchemeUrg][ColBorder].pixel);
++		}
+ 		if (wmh-&gt;flags &amp; InputHint)
+ 			c-&gt;neverfocus = !wmh-&gt;input;
+ 		else
+-- 
+2.27.0
+
+
+   </dlei@reddott.de></pre>
+  <script>function gtElInit() {var lib = new google.translate.TranslateService();lib.translatePage('en', 'pt', function () {});}</script>
+  <script src="dwm-6.2-urg-border_files/element.js" type="text/javascript"></script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="dwm-6.2-urg-border_files/translate_24dp.png" alt="Google Tradutor" width="20" height="20"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Texto original</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Sugerir uma tradução melhor</span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+ 
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>
