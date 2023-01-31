@@ -19,7 +19,7 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#2e3440"; /* original color #005577 */
-static const char col_urgborder[]   = "#58a6ff";
+static const char col_urgborder[]   = "#5e81ac";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -86,6 +86,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F5,     spawn,          {.v = wppcmd } },
 	{ MODKEY,                       XK_F6,     spawn,          {.v = sheetcmd } },
 	{ MODKEY,                       XK_F7,     spawn,          {.v = drivecmd } },
+	{ MODKEY|ControlMask,           XK_equal,  spawn,          SHCMD("bash ~/.config/scripts/notify/volume+.sh") },
+	{ MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("bash ~/.config/scripts/notify/volume-.sh") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
@@ -122,6 +124,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
 };
 
 /* button definitions */
