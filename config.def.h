@@ -88,6 +88,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F7,     spawn,          {.v = drivecmd } },
 	{ MODKEY|ControlMask,           XK_equal,  spawn,          SHCMD("bash ~/.config/scripts/notify/volume+.sh") },
 	{ MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("bash ~/.config/scripts/notify/volume-.sh") },
+	{ MODKEY|ControlMask,           XK_space,  spawn,          SHCMD("bash ~/.config/rofi/launchers/type-4/launcher.sh") },
+	{ MODKEY,                       XK_Escape,  spawn,          SHCMD("bash ~/.config/rofi/powermenu/type-1/powermenu.sh") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
