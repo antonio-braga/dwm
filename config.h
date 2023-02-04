@@ -1,26 +1,26 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int borderpx       = 2;        /* border pixel of windows */
+static const unsigned int gappx          = 5;        /* gaps between windows */
+static const unsigned int snap           = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayonleft  = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;        /* 0 means no systray */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 2;        /* 2 is the default spacing around the bar's font */
-static const char *fonts[]          = { "Roboto:style=Bold:size=14:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=12:antialias=true:autohint=true" };
-static const char dmenufont[]       = "Roboto:style=Bold:size=14:antialias=true:autohint=true";
-static const char col_gray1[]       = "#2e3440"; /* original color #222222 */
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#2e3440"; /* original color #005577 */
-static const char col_urgborder[]   = "#5e81ac";
-static const char *colors[][3]      = {
+static const int showsystray             = 1;        /* 0 means no systray */
+static const int showbar                 = 1;        /* 0 means no bar */
+static const int topbar                  = 1;        /* 0 means bottom bar */
+static const int user_bh                 = 2;        /* 2 is the default spacing around the bar's font */
+static const char *fonts[]               = { "Roboto:style=Bold:size=14:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=12:antialias=true:autohint=true" };
+static const char dmenufont[]            = "Roboto:style=Bold:size=14:antialias=true:autohint=true";
+static const char col_gray1[]            = "#2e3440"; /* original color #222222 */
+static const char col_gray2[]            = "#444444";
+static const char col_gray3[]            = "#bbbbbb";
+static const char col_gray4[]            = "#eeeeee";
+static const char col_cyan[]             = "#2e3440"; /* original color #005577 */
+static const char col_urgborder[]        = "#5e81ac";
+static const char *colors[][3]           = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_urgborder  },
@@ -88,10 +88,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F7,     spawn,          {.v = drivecmd } },
 	{ MODKEY|ControlMask,           XK_equal,  spawn,          SHCMD("bash ~/.config/scripts/notify/volume+.sh") },
 	{ MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("bash ~/.config/scripts/notify/volume-.sh") },
+	{ MODKEY,                       XK_m,      spawn,          SHCMD("bash ~/.config/scripts/rofi/monitor-layout.sh") },
 	{ MODKEY|ControlMask,           XK_space,  spawn,          SHCMD("bash ~/.config/rofi/launchers/type-4/launcher.sh") },
 	{ MODKEY,                       XK_Escape, spawn,          SHCMD("bash ~/.config/rofi/powermenu/type-1/powermenu.sh") },
 	{ MODKEY,                       XK_v,      spawn,          SHCMD("bash ~/.config/rofi/applets/bin/volume.sh") },
-	{ MODKEY,                       XK_m,      spawn,          SHCMD("bash ~/.config/scripts/rofi/monitor-layout.sh") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
@@ -103,7 +103,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_c,      killclient,     {0} },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
