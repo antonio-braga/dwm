@@ -1,4 +1,4 @@
-/* See LICENSE file for copyright and license details. */
+ /* See LICENSE file for copyright and license details. */
 
 /* appearance */
 static const unsigned int borderpx       = 2;        /* border pixel of windows */
@@ -12,8 +12,8 @@ static const int showsystray             = 1;        /* 0 means no systray */
 static const int showbar                 = 1;        /* 0 means no bar */
 static const int topbar                  = 1;        /* 0 means bottom bar */
 static const int user_bh                 = 2;        /* 2 is the default spacing around the bar's font */
-static const char *fonts[]               = { "Roboto:style=Bold:size=14:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=12:antialias=true:autohint=true" };
-static const char dmenufont[]            = "Roboto:style=Bold:size=14:antialias=true:autohint=true";
+static const char *fonts[]               = { "Roboto:style=Bold:size=10:antialias=true:autohint=true", "NotoColorEmoji:pixelsize=14:antialias=true:autohint=true" };
+static const char dmenufont[]            = "Roboto:style=Bold:size=10:antialias=true:autohint=true";
 static const char col_gray1[]            = "#2e3440"; /* original color #222222 */
 static const char col_gray2[]            = "#444444";
 static const char col_gray3[]            = "#bbbbbb";
@@ -66,14 +66,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
-static const char *browsercmd[] = { "firefox", NULL };
-static const char *codecmd[]    = { "code", NULL };
-static const char *printcmd[]   = { "gnome-screenshot", "-i" };
-static const char *wppcmd[]     = { "/usr/bin/firefoxpwa", "site", "launch", "01GQQJ6NPM3SBB1NGJTEH80MMV", "--protocol" };
-static const char *sheetcmd[]   = { "/usr/bin/firefoxpwa", "site", "launch", "01GQNKX3SP1AG6JPM59HV5ZH7E", "--protocol" };
-static const char *drivecmd[]   = { "/usr/bin/firefoxpwa", "site", "launch", "01GQNKZW3SQ4RJ9HZC3D8A9APN", "--protocol" };
+static const char *dmenucmd[]    = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *termcmd[]     = { "st", NULL };
+static const char *browsercmd[]  = { "firefox", NULL };
+static const char *codecmd[]     = { "code", NULL };
+static const char *printcmd[]    = { "gnome-screenshot", "-i" };
+static const char *lockcmd[]     = { "xlock", "-mode", "pacman" };
+static const char *wppcmd[]      = { "/usr/bin/firefoxpwa", "site", "launch", "01GQQJ6NPM3SBB1NGJTEH80MMV", "--protocol" };
+static const char *sheetcmd[]    = { "/usr/bin/firefoxpwa", "site", "launch", "01GQNKX3SP1AG6JPM59HV5ZH7E", "--protocol" };
+static const char *drivecmd[]    = { "/usr/bin/firefoxpwa", "site", "launch", "01GQNKZW3SQ4RJ9HZC3D8A9APN", "--protocol" };
 
 #include "movestack.c"
 static const Key keys[] = {
@@ -81,14 +82,17 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_Print,  spawn,          {.v = printcmd } },
+	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
 	{ MODKEY,                       XK_F1,     spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_F2,     spawn,          {.v = codecmd } },
 	{ MODKEY,                       XK_F5,     spawn,          {.v = wppcmd } },
 	{ MODKEY,                       XK_F6,     spawn,          {.v = sheetcmd } },
 	{ MODKEY,                       XK_F7,     spawn,          {.v = drivecmd } },
-	{ MODKEY|ControlMask,           XK_equal,  spawn,          SHCMD("bash ~/.config/scripts/notify/volume+.sh") },
-	{ MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("bash ~/.config/scripts/notify/volume-.sh") },
-	{ MODKEY,                       XK_m,      spawn,          SHCMD("bash ~/.config/scripts/rofi/monitor-layout.sh") },
+	{ MODKEY|ControlMask,           XK_s,      spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/blocks/shutdown") },
+	{ MODKEY|ControlMask,           XK_r,      spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/blocks/reboot") },
+	{ MODKEY|ControlMask,           XK_equal,  spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/notify/volume+.sh") },
+	{ MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/notify/volume-.sh") },
+	{ MODKEY,                       XK_m,      spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/rofi/monitor-layout.sh") },
 	{ MODKEY|ControlMask,           XK_space,  spawn,          SHCMD("bash ~/.config/rofi/launchers/type-4/launcher.sh") },
 	{ MODKEY,                       XK_Escape, spawn,          SHCMD("bash ~/.config/rofi/powermenu/type-1/powermenu.sh") },
 	{ MODKEY,                       XK_v,      spawn,          SHCMD("bash ~/.config/rofi/applets/bin/volume.sh") },
@@ -96,7 +100,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Right,  movestack,      {.i = +1 } },
-  { MODKEY|ShiftMask,             XK_Left,   movestack,      {.i = -1 } },
+    { MODKEY|ShiftMask,             XK_Left,   movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
