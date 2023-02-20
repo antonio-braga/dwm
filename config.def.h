@@ -1,7 +1,7 @@
  /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 2;        /* border pixel of windows */
+static const unsigned int borderpx       = 3;        /* border pixel of windows */
 static const unsigned int gappx          = 5;        /* gaps between windows */
 static const unsigned int snap           = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -70,6 +70,7 @@ static const char *dmenucmd[]    = { "dmenu_run", "-m", dmenumon, "-fn", dmenufo
 static const char *termcmd[]     = { "st", NULL };
 static const char *browsercmd[]  = { "firefox", NULL };
 static const char *codecmd[]     = { "code", NULL };
+static const char *rangercmd[]   = { "st", "-e", "ranger" };
 static const char *printcmd[]    = { "gnome-screenshot", "-i" };
 static const char *lockcmd[]     = { "xlock", "-mode", "pacman" };
 static const char *wppcmd[]      = { "/usr/bin/firefoxpwa", "site", "launch", "01GQQJ6NPM3SBB1NGJTEH80MMV", "--protocol" };
@@ -83,6 +84,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_Print,  spawn,          {.v = printcmd } },
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
+	{ MODKEY,                       XK_f,      spawn,          {.v = rangercmd } },
 	{ MODKEY,                       XK_F1,     spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_F2,     spawn,          {.v = codecmd } },
 	{ MODKEY,                       XK_F5,     spawn,          {.v = wppcmd } },
@@ -92,6 +94,8 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_r,      spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/blocks/reboot") },
 	{ MODKEY|ControlMask,           XK_equal,  spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/notify/volume+.sh") },
 	{ MODKEY|ControlMask,           XK_minus,  spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/notify/volume-.sh") },
+	{ MODKEY|ShiftMask,             XK_equal,  spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/notify/brightness+.sh") },
+	{ MODKEY|ShiftMask,             XK_minus,  spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/notify/brightness-.sh") },
 	{ MODKEY,                       XK_m,      spawn,          SHCMD("bash ~/.config/dwm/dotfiles/scripts/rofi/monitor-layout.sh") },
 	{ MODKEY|ControlMask,           XK_space,  spawn,          SHCMD("bash ~/.config/rofi/launchers/type-4/launcher.sh") },
 	{ MODKEY,                       XK_Escape, spawn,          SHCMD("bash ~/.config/rofi/powermenu/type-1/powermenu.sh") },
